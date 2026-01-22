@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block title %}Home | GloryLandmark{% endblock %}
+{% block content %}
+
+<section class="hero text-center"
+    style="background: linear-gradient(rgba(11, 60, 93, 0.8), rgba(11, 60, 93, 0.8)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500&q=80'); background-size: cover; color: white; padding: 100px 0;">
+    <h1 class="display-3 fw-bold">GloryLandmark Services</h1>
+    <p class="lead mb-4">Leading Excellence in Real Estate, Construction, and Consultancy.</p>
+    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg px-5">Start Your Project</a>
+</section>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Featured Landmarks</h2>
+        <a href="{% url 'property_list' %}" class="text-decoration-none" style="color: #B59A5B;">View All <i
+                class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="row g-4">
+        {% for property in featured_properties %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 position-relative">
+                <span
+                    class="badge position-absolute top-0 start-0 m-3 p-2 {% if property.category == 'SALE' %}bg-danger{% else %}bg-success{% endif %}"
+                    style="z-index: 10;">
+                    {{ property.get_category_display }}
+                </span>
+
+                <img src="{{ property.image.url }}" loading="lazy" class="card-img-top"
+                    style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="fw-bold">{{ property.title }}</h5>
+                    <p class="fw-bold" style="color: #B59A5B;">₦{{ property.price }}</p>
+                    <p class="text-muted small"><i class="fas fa-map-marker-alt me-1"></i> {{ property.location }}</p>
+
+                    <a href="{% url 'property_detail' property.pk %}" class="btn w-100 fw-bold"
+                        style="background-color: #B59A5B; color: white; border: none; transition: 0.3s;">View
+                        Landmark</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted text-center">No featured properties at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary fw-bold">Recent Projects</h2>
+            <a href="{% url 'construction' %}" class="text-decoration-none" style="color: #B59A5B;">Our Portfolio <i
+                    class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="row g-4">
+            {% for project in recent_projects %}
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="{{ project.image.url }}" loading="lazy" class="card-img-top"
+                        style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h6 class="text-uppercase small fw-bold" style="color: #B59A5B;">{{ project.location }}</h6>
+                        <h5 class="fw-bold">{{ project.title }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<section class="py-5" style="background-color: #0B3C5D; color: white;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h6 class="text-uppercase fw-bold" style="color: #B59A5B; letter-spacing: 2px;">Professional Advice</h6>
+                <h2 class="display-5 fw-bold mb-4">Strategic Real Estate and Engineering Consultancy</h2>
+                <p class="lead mb-4" style="opacity: 0.9;">
+                    Navigating the property market requires expert insight. From investment analysis to project
+                    management, GloryLandmark provides the clarity you need to make informed decisions.
+                </p>
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2" style="color: #B59A5B;"></i>
+                            <span>Market Valuation</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2" style="color: #B59A5B;"></i>
+                            <span>Feasibility Studies</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2" style="color: #B59A5B;"></i>
+                            <span>Land Acquisitions</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2" style="color: #B59A5B;"></i>
+                            <span>Project Management</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'contact' %}?category=CONSULTANCY" class="btn btn-lg px-4 fw-bold"
+                    style="background-color: #B59A5B; color: white;">
+                    Book a Consultation
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    {% load static %} <img src="{% static 'img/consultancy.jpg' %}" alt="Consultancy Meeting"
+                        class="img-fluid rounded shadow-lg w-100">
+                    <div class="position-absolute bottom-0 start-0 p-4 m-3 d-none d-md-block"
+                        style="background-color: rgba(181, 154, 91, 0.9); color: white; border-radius: 5px;">
+                        <h4 class="mb-0 fw-bold">15+ Years</h4>
+                        <small>Industry Expertise</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="py-4" style="background-color: #f1f1f1;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <h3 class="fw-bold text-primary mb-0">200+</h3>
+                <small class="text-muted text-uppercase">Projects Completed</small>
+            </div>
+            <div class="col-md-3">
+                <h3 class="fw-bold text-primary mb-0">500+</h3>
+                <small class="text-muted text-uppercase">Happy Clients</small>
+            </div>
+            <div class="col-md-3">
+                <h3 class="fw-bold text-primary mb-0">₦2B+</h3>
+                <small class="text-muted text-uppercase">Assets Managed</small>
+            </div>
+            <div class="col-md-3">
+                <h3 class="fw-bold text-primary mb-0">12</h3>
+                <small class="text-muted text-uppercase">Expert Consultants</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <h3 class="fw-bold mb-4">New on Market</h3>
+    <div class="row g-4">
+        {% for property in latest_properties %}
+        <div class="col-md-3">
+            <div class="card h-100 border-0 shadow-sm">
+                <img src="{{ property.image.url }}" loading="lazy" class="card-img-top"
+                    style="height: 150px; object-fit: cover;">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-1">{{ property.title }}</h6>
+                    <p class="small text-primary mb-0">₦{{ property.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

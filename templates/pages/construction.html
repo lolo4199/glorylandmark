@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Construction Services | GloryLandmark{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+            <h6 class="text-uppercase fw-bold mb-2" style="color: #B59A5B; letter-spacing: 2px;">Our Expertise</h6>
+            <h1 class="display-5 fw-bold text-primary mb-4">Quality Construction & Engineering</h1>
+            <p class="lead text-muted mb-4">From residential developments to commercial complexes, we build with precision, safety, and durability in mind.</p>
+
+            <div class="row g-4 mt-2">
+                <div class="col-6">
+                    <div class="p-3 border-start border-4" style="border-color: #B59A5B !important; background-color: #f8f9fa;">
+                        <h6 class="fw-bold mb-1">Civil Works</h6>
+                        <p class="small text-muted mb-0">Structural foundations and professional engineering.</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border-start border-4" style="border-color: #B59A5B !important; background-color: #f8f9fa;">
+                        <h6 class="fw-bold mb-1">Renovations</h6>
+                        <p class="small text-muted mb-0">Modernizing and upgrading existing structures.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <a href="{% url 'contact' %}?category=CONSTRUCTION" class="btn btn-primary btn-lg px-4 shadow-sm">Request a Site Visit</a>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="position-relative rounded-4 overflow-hidden shadow-lg border">
+                <div class="ratio ratio-16x9">
+                    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&w=800&q=80">
+                        <source src="{% static 'video/construction.mp4' %}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="position-absolute bottom-0 start-0 p-3 text-white w-100" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-grow spinner-grow-sm text-danger me-2" role="status"></div>
+                        <span class="small fw-bold text-uppercase">Project Site</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5 border-top">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-primary">Our Completed Projects</h2>
+            <p class="text-muted">Explore our portfolio of excellence across Nigeria.</p>
+            <hr class="w-25 mx-auto" style="color: #B59A5B; height: 3px; opacity: 1;">
+        </div>
+
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm hover-lift transition">
+                    {% if project.image %}
+                    <div class="overflow-hidden">
+                        <img src="{{ project.image.url }}" loading="lazy" class="card-img-top transition-img" alt="{{ project.title }}"
+                            style="height: 250px; object-fit: cover;">
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="fw-bold mb-0">{{ project.title }}</h5>
+                            <span class="badge bg-secondary">{{ project.completion_date|date:"Y" }}</span>
+                        </div>
+                        <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-2 text-primary"></i>{{ project.location }}</p>
+                        <p class="card-text text-muted">{{ project.description|truncatewords:15 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-4">
+                        <a href="{% url 'contact' %}" class="btn w-100 fw-bold"
+                        style="background-color: #B59A5B; color: white; border: none; transition: 0.3s;">Enquire About This Build</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-hard-hat fa-3x text-muted mb-3"></i>
+                <p class="text-muted">Our project showcases are being prepared. Stay tuned!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important; }
+    .transition-img { transition: transform 0.5s ease; }
+    .hover-lift:hover .transition-img { transform: scale(1.1); }
+</style>
+
+{% endblock %}

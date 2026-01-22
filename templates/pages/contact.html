@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Contact Us | GloryLandmark{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Contact Us</h1>
+        <p class="lead">Inquire about Properties, Construction Projects, or Engineering Consultancy</p>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-lg-4">
+            <div class="p-4 rounded shadow-sm" style="background-color: var(--primary-color); color: white;">
+                <h3 class="mb-4" style="color: var(--accent-color);">Get In Touch</h3>
+                <div class="mb-4">
+                    <i class="fas fa-map-marker-alt me-2 text-warning"></i>
+                    <strong>Address:</strong><br>
+                        140, Esepe Road Ilepo Araromi,<br>
+                        Off Badagry Expressway,<br>
+                        Lagos State, Nigeria
+                </div>
+                <div class="mb-4">
+                    <i class="fas fa-phone-alt me-2 text-warning"></i>
+                    <strong>Phone:</strong><br>
+                    +234 803 3808 348
+                </div>
+                <div class="mb-4">
+                    <i class="fas fa-envelope me-2 text-warning"></i>
+                    <strong>Email:</strong><br>
+                    ijaoyetaiwotemitayo@gmail.com
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class="fw-bold text-primary mb-4">Send us a Message</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            {{ form.name }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.email }}
+                        </div>
+                        <div class="col-12">
+                            {{ form.service }} </div>
+                        <div class="col-12">
+                            {{ form.message }}
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-lg w-100 text-white"
+                                style="background-color: #0B3C5D;">
+                                Send Inquiry
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

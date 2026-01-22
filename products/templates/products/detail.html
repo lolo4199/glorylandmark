@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block extra_head %}
+<meta property="og:title" content="{{ property.title }} | GloryLandmark">
+<meta property="og:description" content="Price: ₦{{ property.price }} - Located in {{ property.location }}">
+<meta property="og:image" content="{{ property.image.url }}">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+{% block title %}{{ property.title }} | GloryLandmark{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'property_list' %}" class="text-decoration-none">Properties</a>
+            </li>
+            <li class="breadcrumb-item active">{{ property.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <img src="{{ property.image.url }}" loading="lazy" class="img-fluid rounded" alt="{{ property.title }}"
+                    style="width: 100%; max-height: 500px; object-fit: cover;">
+            </div>
+
+            <h5 class="fw-bold mb-3">Property Gallery</h5>
+            <div class="row g-2 mb-4">
+                {% for extra in property.images.all %}
+                <div class="col-3">
+                    <img src="{{ extra.image.url }}" loading="lazy" class="img-fluid rounded shadow-sm border"
+                        style="height: 100px; width: 100%; object-fit: cover; cursor: pointer;">
+                </div>
+                {% empty %}
+                <p class="text-muted small ms-2">No additional images available.</p>
+                {% endfor %}
+            </div>
+
+            <div class="p-4 bg-white rounded shadow-sm">
+                <h4 class="fw-bold text-primary">Description</h4>
+                <hr>
+                <p class="lead text-secondary">{{ property.description|linebreaks }}</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 100px; z-index: 1;">
+                <div class="card border-0 shadow p-4 mb-4">
+                    <span
+                        class="badge {% if property.category == 'SALE' %}bg-danger{% else %}bg-success{% endif %} mb-3 w-25">
+                        {{ property.get_category_display }}
+                    </span>
+                    <h2 class="fw-bold text-primary">₦{{ property.price }}</h2>
+                    <p class="text-muted"><i class="fas fa-map-marker-alt me-2 text-danger"></i>{{ property.location }}
+                    </p>
+
+                    <div class="row text-center border-top border-bottom py-3 my-3">
+                        <div class="col-4">
+                            <i class="fas fa-bed text-muted"></i>
+                            <div class="small fw-bold">{{ property.bedrooms }} Bed</div>
+                        </div>
+                        <div class="col-4">
+                            <i class="fas fa-bath text-muted"></i>
+                            <div class="small fw-bold">{{ property.bathrooms }} Bath</div>
+                        </div>
+                        <div class="col-4">
+                            <i class="fas fa-ruler-combined text-muted"></i>
+                            <div class="small fw-bold">{{ property.sqft }} sqft</div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'contact' %}?property={{ property.title }}" class="btn fw-bold py-3"
+                            style="background-color: #B59A5B; color: white;">
+                            Make an Inquiry
+                        </a>
+                        <a href="https://wa.me/2348033808348?text=I'm%20interested%20in%20{{ property.title|urlencode }}"
+                            class="btn btn-success w-100 fw-bold py-3 mt-2" target="_blank">
+                            <i class="fab fa-whatsapp me-2"></i> Chat on WhatsApp
+                        </a>
+                        <button class="btn btn-outline-primary py-2" onclick="window.print()">
+                            <i class="fas fa-print me-2"></i> Download Flyer
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alert alert-light border shadow-sm">
+                    <h6 class="fw-bold"><i class="fas fa-shield-alt text-success me-2"></i>Verified Landmark</h6>
+                    <p class="small mb-0">This property has been inspected and verified by the GloryLandmark team.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

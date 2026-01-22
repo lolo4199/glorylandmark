@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Consultancy Services | GloryLandmark{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-primary mb-4">Strategic Real Estate & <br> <span style="color: var(--accent-color);">Engineering Consultancy</span></h1>
+            <p class="lead">We provide expert guidance for investors, developers, and homeowners to maximize value and minimize risk.</p>
+            
+            <ul class="list-unstyled mt-4">
+                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Feasibility Studies & Market Analysis</li>
+                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Cost Estimation & Budgeting</li>
+                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Legal and Documentation Support</li>
+                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Project Management & Supervision</li>
+                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Engineering Installation & Maintenance</li>
+
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-5 rounded shadow" style="background-color: var(--primary-color); color: white;">
+                <h2 style="color: var(--accent-color);">Why Consult With Us?</h2>
+                <p>Investing in real estate or construction or engineering is a major decision. Our team of professionals ensures that your capital is protected and your project is viable before you spend a single dollar.</p>
+                <hr style="background-color: var(--accent-color); height: 2px; opacity: 1;">
+                <p class="fst-italic">"Experience is the difference between a successful project and an expensive mistake."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4 mb-5">
+            <h2 class="fw-bold text-primary">Expert Consultancy</h2>
+            <p class="text-muted">We provide strategic advice for high-value investments in real estate and infrastructure.</p>
+            <div class="p-4 rounded shadow-sm" style="background-color: var(--primary-color); color: white;">
+                <h5 style="color: var(--accent-color);">Book a Session</h5>
+                <p class="small">Contact our experts for a personalized feasibility study.</p>
+                <a href="{% url 'contact' %}" class="btn btn-outline-light btn-sm">Inquire Now</a>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <h3 class="mb-4 fw-bold">Frequently Asked Questions</h3>
+            <div class="accordion accordion-flush shadow-sm" id="consultancyAccordion">
+                {% for faq in faqs %}
+                <div class="accordion-item border mb-2 rounded">
+                    <h2 class="accordion-header" id="flush-heading{{ forloop.counter }}">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ forloop.counter }}">
+                            {{ faq.question }}
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#consultancyAccordion">
+                        <div class="accordion-body text-secondary">
+                            {{ faq.answer }}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted">No FAQs available at this time.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

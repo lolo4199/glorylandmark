@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Property Listings | GloryLandmark{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 fw-bold">Available Properties</h2>
+
+    <div class="card p-4 shadow-sm border-0 mb-5" style="background-color: #f8f9fa;">
+        <form action="{% url 'property_list' %}" method="GET" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" name="keyword" class="form-control" placeholder="Search by name or location..."
+                    value="{{ request.GET.keyword }}">
+            </div>
+
+            <div class="col-md-3">
+                <select name="category" class="form-select">
+                    <option value="">All Categories</option>
+                    <option value="SALE" {% if request.GET.category == 'SALE' %}selected{% endif %}>For Sale</option>
+                    <option value="RENT" {% if request.GET.category == 'RENT' %}selected{% endif %}>For Rent</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <input type="number" name="max_price" class="form-control" placeholder="Max Price (₦)"
+                    value="{{ request.GET.max_price }}">
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn w-100 fw-bold" style="background-color: #0B3C5D; color: white;">
+                    <i class="fas fa-search me-2"></i>Filter
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row g-4">
+        {% for property in properties %}
+        <div class="col-md-4">
+            <div class="card h-100 property-card border-0 shadow-sm position-relative">
+
+                <span
+                    class="badge position-absolute top-0 start-0 m-3 p-2 {% if property.category == 'SALE' %}bg-danger{% else %}bg-success{% endif %}"
+                    style="z-index: 10;">
+                    {{ property.get_category_display }}
+                </span>
+
+                {% if property.image %}
+                <img src="{{ property.image.url }}" class="card-img-top" alt="{{ property.title }}"
+                    style="height: 220px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="fw-bold text-primary">{{ property.title }}</h5>
+                    <p class="text-muted small"><i class="fas fa-map-marker-alt me-2"></i>{{ property.location }}</p>
+
+                    <div class="d-flex justify-content-between text-muted small mb-3 border-top pt-2">
+                        <span><i class="fas fa-bed"></i> {{ property.bedrooms }}</span>
+                        <span><i class="fas fa-bath"></i> {{ property.bathrooms }}</span>
+                        <span><i class="fas fa-ruler-combined"></i> {{ property.sqft }} sqft</span>
+                    </div>
+
+                    <h5 class="fw-bold" style="color: #B59A5B;">₦{{ property.price }}</h5>
+                </div>
+
+                <div class="card-footer bg-white border-0 pb-3">
+                    <a href="{% url 'property_detail' property.pk %}" class="btn w-100 fw-bold"
+                        style="background-color: #B59A5B; color: white; border: none; transition: 0.3s;">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div> {% empty %}
+        <div class="col-12">
+            <p>No properties available at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div> {% endblock %}

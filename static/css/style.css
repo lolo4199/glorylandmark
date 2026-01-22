@@ -1,0 +1,71 @@
+:root {
+    --primary-color: #0B3C5D;
+    --accent-color: #B59A5B;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+}
+
+/* HERO */
+.hero {
+    background-color: #f8f9fa;
+    padding: 120px 20px;
+}
+
+/* FORCE GOLD BUTTON */
+.btn-primary {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #9f874f !important;
+    border-color: #9f874f !important;
+}
+
+/* TEXT */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+
+
+/* Custom Property Card Styles */
+.property-card {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+}
+
+.price-tag {
+    color: var(--accent-color) !important; /* Your Gold Color */
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.badge-gold {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+}
+
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Make the current page link turn gold */
+.navbar-nav .nav-link.active {
+    color: var(--accent-color) !important;
+}

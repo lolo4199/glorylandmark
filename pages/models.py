@@ -26,7 +26,7 @@ class Inquiry(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = CloudinaryField(upload_to='projects/')
+    image = CloudinaryField('image')  # Requires 'Pillow' library
     completion_date = models.DateField()
     location = models.CharField(max_length=200)
 

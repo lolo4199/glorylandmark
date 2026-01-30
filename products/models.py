@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 class Property(models.Model):
     # Choices for the type of service
     CATEGORY_CHOICES = [
@@ -11,7 +12,7 @@ class Property(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.TextField()
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES, default='SALE')
-    image = models.ImageField(upload_to='properties/') # Requires 'Pillow' library
+    image = CloudinaryField(upload_to='properties/') # Requires 'Pillow' library
     is_published = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     list_date = models.DateTimeField(auto_now_add=True)
@@ -25,7 +26,7 @@ class Property(models.Model):
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='properties/gallery/')
+    image = CloudinaryField(upload_to='properties/gallery/')
 
     def __str__(self):
         return f"Image for {self.property.title}"    

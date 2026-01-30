@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 class Inquiry(models.Model):
     SERVICE_CHOICES = [
@@ -25,7 +26,7 @@ class Inquiry(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='projects/')
+    image = CloudinaryField(upload_to='projects/')
     completion_date = models.DateField()
     location = models.CharField(max_length=200)
 

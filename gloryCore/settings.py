@@ -37,7 +37,9 @@ ALLOWED_HOSTS = ['glorylandmark.onrender.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
     "django.contrib.admin",
+    'cloudinary',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -130,3 +132,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('dsmj2phur'),
+    'API_KEY': os.getenv('181327537796627'),
+    'API_SECRET': os.getenv('PsQOT-dLATQlRToU0ul8ESD8PlA'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

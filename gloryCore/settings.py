@@ -13,6 +13,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv # 1. Import the library
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -40,13 +41,13 @@ ALLOWED_HOSTS = ['glorylandmark.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'cloudinary_storage',
-    "django.contrib.admin",
+     "django.contrib.staticfiles",
     'cloudinary',
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
     'products',
     'pages',
 ]
@@ -123,7 +124,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -140,6 +140,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 
@@ -149,9 +150,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dsmj2phur', 
-    'API_KEY': '181327537796627',
-    'API_SECRET': 'PsQOT-dLATQlRToU0ul8ESD8PlA',
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

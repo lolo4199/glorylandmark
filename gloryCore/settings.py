@@ -9,17 +9,19 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
 import os
 import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv # 1. Import the library
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # 2. Load the .env file
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 
 
 # Quick-start development settings - unsuitable for production

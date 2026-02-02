@@ -126,9 +126,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+
+STATICFILES_DIRS = [BASE_DIR / 'statics']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
-STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 # Media files
 MEDIA_URL = '/media/'
@@ -136,9 +142,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('dsmj2phur'),
-    'API_KEY': os.getenv('181327537796627'),
-    'API_SECRET': os.getenv('PsQOT-dLATQlRToU0ul8ESD8PlA'),
+    'CLOUD_NAME': 'dsmj2phur', 
+    'API_KEY': '181327537796627',
+    'API_SECRET': 'PsQOT-dLATQlRToU0ul8ESD8PlA',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

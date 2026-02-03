@@ -40,8 +40,7 @@ ALLOWED_HOSTS = ['glorylandmark.onrender.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary_storage',
-     "django.contrib.staticfiles",
+    "django.contrib.staticfiles",
     'cloudinary',
     "django.contrib.admin",
     "django.contrib.auth",
@@ -130,18 +129,16 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'statics',
-                    ]
+    BASE_DIR / 'static',
+]
+                    
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 
 # Media files
@@ -157,6 +154,7 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+print('BASE_DIR:', BASE_DIR)
 
 
 

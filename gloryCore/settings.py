@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Use it for DEBUG too
 DEBUG = os.getenv('DEBUG') == 'True'
-ALLOWED_HOSTS = ['glorylandmark.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
